@@ -10,11 +10,13 @@ from gurux_dlms.GXDLMSTranslator import GXDLMSTranslator
 from gurux_dlms.GXDLMSTranslatorMessage import GXDLMSTranslatorMessage
 from bs4 import BeautifulSoup
 
-# EVN Schlüssel eingeben zB. "36C66639E48A8CA4D6BC8B282A793BBB"
-evn_schluessel = "dein_Schlüssel"
+# EVN Schluessel eingeben zB. "36C66639E48A8CA4D6BC8B282A793BBB"
+evn_schluessel = "dein_Schluessel"
 
 #MQTT Verwenden (True | False)
 useMQTT = False
+useMYSQL = True
+useFILE = True
 
 #MQTT Broker IP adresse Eingeben ohne Port!
 mqttBroker = "192.168.1.10"
@@ -62,7 +64,8 @@ while 1:
         pdu.clear()
         xml += tr.messageToXml(msg)
 
-    soup = BeautifulSoup(xml, 'lxml')
+    #soup = BeautifulSoup(xml, 'lxml')
+    soup = BeautifulSoup(xml, 'html.parser')
 
     results_32 = soup.find_all('uint32')
     results_16 = soup.find_all('uint16')
@@ -147,12 +150,41 @@ while 1:
         client.publish("Smartmeter/StromL2", StromL2)
         client.publish("Smartmeter/StromL3", StromL3)
         client.publish("Smartmeter/Leistungsfaktor", Leistungsfaktor)
-    #except BaseException as err:
-    #   print("Fehler beim Synchronisieren. Programm bitte ein weiteres mal Starten.")
-    #   print()
-    #   print("Fehler: ", format(err))
 
-    #   sys.exit()
+        
+    if useFILE:
+        f = open("/run/smartmeter.html", "w")
+        f.write("<html><head><title>Smartmeter</title> <meta http-equiv=\"refresh\" content=\"3\"> </head>  <body>  </body></html><pre>")
+        f.write("Leistung   : " + str(MomentanleistungP - MomentanleistungN) + " W\n")
+        f.write("Verbraucht : " + str(WirkenergieP) + "\n")
+        f.write("Eingespeist: " + str(WirkenergieN) + "\n")
+        f.write("L1 : " + str(SpannungL1) + "V " + str(StromL1)+ "A\n")
+        f.write("L2 : " + str(SpannungL2) + "V " + str(StromL2)+ "A\n")
+        f.write("L3 : " + str(SpannungL3) + "V " + str(StromL3)+ "A\n")
+        f.close()
+        
+        
+        
+    if useMYSQL:
+        import mysql.connector
 
+        mydb = mysql.connector.connect(
+          host="MYSQL_HOST",
+          user="MYSQL_USER",
+          password="MYSQL_PW",
+          database="MYSQL_DB"
+        )
 
+        mycursor = mydb.cursor()
 
+        sql = "INSERT INTO TABELLENNAME (zeit, bezug, einspeisung, leistung, U_L1, U_L2, U_L3, I_L1, I_L2, I_L3, Leistungsfaktor) VALUES (utc_timestamp(), %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+        val = (WirkenergieP, WirkenergieN, MomentanleistungP - MomentanleistungN, SpannungL1, SpannungL2, SpannungL3, StromL1, StromL2, StromL3, Leistungsfaktor)
+        mycursor.execute(sql, val)
+
+        mydb.commit()
+
+        print(mycursor.rowcount, "record inserted.")
+
+        
+        
+        
