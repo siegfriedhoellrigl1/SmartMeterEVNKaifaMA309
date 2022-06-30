@@ -7,6 +7,7 @@ siehe https://inator.at/?p=1492
   - kann jetzt direkt in eine MySQL schreiben (es wird aber dann JEDER Messwert geschrieben, d.h. so ca. alle 3 Sekunden)
   - kann auch direkt (in die RAMDisk) bei jedem neuen Messwert eine Datei überschreiben (damit man bei Auslieferung via Webserver möglichst aktuelle Daten sieht
   - Kann direkt ein Tasmota Gerät (z.B. umgeflashtes SonOff o.ä.) bei Überschuss ansteuern
+  - Erweitert um die "dbwriter.sh" -> damit man auch per Cronjob Daten in eine MySQL schreiben kann; z.B. alle 15 Minuten
 
 # Inspiriert durch diesen Blog
 https://www.michaelreitbauer.at/blog
