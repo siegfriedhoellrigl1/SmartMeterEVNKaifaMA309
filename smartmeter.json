@@ -1,0 +1,789 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 16,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "datasource": {
+        "type": "mysql",
+        "uid": "000000002"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 11,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 3,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "000000002"
+          },
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  Zeit AS \"time\",\n  leistung\nFROM smartmeter\nWHERE\n  Zeit BETWEEN convert_TZ($__timeFrom(),@@SESSION.time_zone,'+00:00') and convert_TZ($__timeTo(),@@SESSION.time_zone,'+00:00')\nORDER BY Zeit",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "leistung"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "smartmeter
+",
+          "timeColumn": "Zeit",
+          "timeColumnType": "datetime",
+          "where": [
+            {
+              "name": "",
+              "params": [
+                "value",
+                "=",
+                "value"
+              ],
+              "type": "expression"
+            }
+          ]
+        }
+      ],
+      "title": "Leistung",
+      "transparent": true,
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "mysql",
+        "uid": "000000002"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 11,
+        "w": 24,
+        "x": 0,
+        "y": 11
+      },
+      "id": 2,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "000000002"
+          },
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  Zeit AS \"time\",\n  bezug\nFROM smartmeter
+\nWHERE\n  Zeit BETWEEN convert_TZ($__timeFrom(),@@SESSION.time_zone,'+00:00') and convert_TZ($__timeTo(),@@SESSION.time_zone,'+00:00')\nORDER BY Zeit",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "bezug"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "smartmeter
+",
+          "timeColumn": "Zeit",
+          "timeColumnType": "datetime",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        },
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "000000002"
+          },
+          "format": "time_series",
+          "group": [],
+          "hide": false,
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  Zeit AS \"time\",\n  einspeisung\nFROM smartmeter
+\nWHERE\n  Zeit BETWEEN convert_TZ($__timeFrom(),@@SESSION.time_zone,'+00:00') and convert_TZ($__timeTo(),@@SESSION.time_zone,'+00:00')\nORDER BY Zeit",
+          "refId": "B",
+          "select": [
+            [
+              {
+                "params": [
+                  "einspeisung"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "smartmeter
+",
+          "timeColumn": "Zeit",
+          "timeColumnType": "datetime",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "title": "Zählerstände",
+      "transparent": true,
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "mysql",
+        "uid": "000000002"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 11,
+        "w": 24,
+        "x": 0,
+        "y": 22
+      },
+      "id": 4,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "000000002"
+          },
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  Zeit AS \"time\",\n  U_L1\nFROM smartmeter
+\nWHERE\n  Zeit BETWEEN convert_TZ($__timeFrom(),@@SESSION.time_zone,'+00:00') and convert_TZ($__timeTo(),@@SESSION.time_zone,'+00:00')\nORDER BY Zeit",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "U_L1"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "smartmeter
+",
+          "timeColumn": "Zeit",
+          "timeColumnType": "datetime",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        },
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "000000002"
+          },
+          "format": "time_series",
+          "group": [],
+          "hide": false,
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  Zeit AS \"time\",\n  U_L2\nFROM smartmeter
+\nWHERE\n  Zeit BETWEEN convert_TZ($__timeFrom(),@@SESSION.time_zone,'+00:00') and convert_TZ($__timeTo(),@@SESSION.time_zone,'+00:00')\nORDER BY Zeit",
+          "refId": "B",
+          "select": [
+            [
+              {
+                "params": [
+                  "U_L2"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "smartmeter
+",
+          "timeColumn": "Zeit",
+          "timeColumnType": "datetime",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        },
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "000000002"
+          },
+          "format": "time_series",
+          "group": [],
+          "hide": false,
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  Zeit AS \"time\",\n  U_L3\nFROM smartmeter
+\nWHERE\n  Zeit BETWEEN convert_TZ($__timeFrom(),@@SESSION.time_zone,'+00:00') and convert_TZ($__timeTo(),@@SESSION.time_zone,'+00:00')\nORDER BY Zeit",
+          "refId": "C",
+          "select": [
+            [
+              {
+                "params": [
+                  "U_L3"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "smartmeter
+",
+          "timeColumn": "Zeit",
+          "timeColumnType": "datetime",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "title": "Spannungen",
+      "transparent": true,
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "mysql",
+        "uid": "000000002"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 24,
+        "x": 0,
+        "y": 33
+      },
+      "id": 5,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "000000002"
+          },
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  Zeit AS \"time\",\n  I_L1\nFROM smartmeter
+\nWHERE\n  Zeit BETWEEN convert_TZ($__timeFrom(),@@SESSION.time_zone,'+00:00') and convert_TZ($__timeTo(),@@SESSION.time_zone,'+00:00')\nORDER BY Zeit",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "I_L1"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "smartmeter
+",
+          "timeColumn": "Zeit",
+          "timeColumnType": "datetime",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        },
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "000000002"
+          },
+          "format": "time_series",
+          "group": [],
+          "hide": false,
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  Zeit AS \"time\",\n  I_L2\nFROM smartmeter
+\nWHERE\n  Zeit BETWEEN convert_TZ($__timeFrom(),@@SESSION.time_zone,'+00:00') and convert_TZ($__timeTo(),@@SESSION.time_zone,'+00:00')\nORDER BY Zeit",
+          "refId": "B",
+          "select": [
+            [
+              {
+                "params": [
+                  "I_L2"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "smartmeter
+",
+          "timeColumn": "Zeit",
+          "timeColumnType": "datetime",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        },
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "000000002"
+          },
+          "format": "time_series",
+          "group": [],
+          "hide": false,
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  Zeit AS \"time\",\n  I_L3\nFROM smartmeter
+\nWHERE\n  Zeit BETWEEN convert_TZ($__timeFrom(),@@SESSION.time_zone,'+00:00') and convert_TZ($__timeTo(),@@SESSION.time_zone,'+00:00')\nORDER BY Zeit",
+          "refId": "C",
+          "select": [
+            [
+              {
+                "params": [
+                  "I_L3"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "smartmeter
+",
+          "timeColumn": "Zeit",
+          "timeColumnType": "datetime",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "title": "Ströme",
+      "transparent": true,
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "mysql",
+        "uid": "000000002"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 24,
+        "x": 0,
+        "y": 42
+      },
+      "id": 6,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "000000002"
+          },
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  Zeit AS \"time\",\n  Leistungsfaktor\nFROM smartmeter
+\nWHERE\n  Zeit BETWEEN convert_TZ($__timeFrom(),@@SESSION.time_zone,'+00:00') and convert_TZ($__timeTo(),@@SESSION.time_zone,'+00:00')\nORDER BY Zeit",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "Leistungsfaktor"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "smartmeter
+",
+          "timeColumn": "Zeit",
+          "timeColumnType": "datetime",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "title": "Leistungsfaktor",
+      "transparent": true,
+      "type": "timeseries"
+    }
+  ],
+  "refresh": false,
+  "schemaVersion": 36,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Smartmeter",
+  "uid": "sn2Rr0mgk",
+  "version": 25,
+  "weekStart": ""
+}
