@@ -10,6 +10,8 @@ from gurux_dlms.GXDLMSTranslator import GXDLMSTranslator
 from gurux_dlms.GXDLMSTranslatorMessage import GXDLMSTranslatorMessage
 from bs4 import BeautifulSoup
 
+import subprocess
+
 # EVN Schluessel eingeben zB. "36C66639E48A8CA4D6BC8B282A793BBB"
 evn_schluessel = "dein_Schluessel"
 
@@ -17,6 +19,7 @@ evn_schluessel = "dein_Schluessel"
 useMQTT = False
 useMYSQL = True
 useFILE = True
+useTASMOTA = False
 
 #MQTT Broker IP adresse Eingeben ohne Port!
 mqttBroker = "192.168.1.10"
@@ -184,6 +187,26 @@ while 1:
         mydb.commit()
 
         print(mycursor.rowcount, "record inserted.")
+
+    if useTASMOTA:
+        import requests
+        ip = 'tasmotaipadresse'
+        p = 'tasmotapasswort'
+        # wenn mindestens soviel eingespeist wird - wird der Tasmota Switch eingeschaltet
+        einspeisungmin = 60
+
+        ueberschuss = 'undef'
+
+        if ( (MomentanleistungP - MomentanleistungN) < ( - einspeisungmin ) ):
+            ueberschuss = 'On'
+        if ( (MomentanleistungP - MomentanleistungN) >0 ):
+            ueberschuss = 'Off'
+        if ( (ueberschuss != 'undef') and ( oldueberschuss != ueberschuss )):
+            oldueberschuss = ueberschuss
+            ret = subprocess.call([
+            'curl',
+            'http://' + ip + '/cm?user=admin&password=' + p + '&cmnd=Power%20' + ueberschuss
+            ])
 
         
         
