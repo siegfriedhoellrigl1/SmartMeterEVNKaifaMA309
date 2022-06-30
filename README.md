@@ -1,4 +1,14 @@
-# Alle Infos zu diesem Projekt befinden sich auf meinem Blog
+# Hab kurzerhand für dieses Smartmeter eine eigene MBus Hardware entwickelt
+siehe https://inator.at/?p=1492
+
+# Ausserdem
+- script noch ein wenig angepasst, damit es auch funktioniert :-)
+- und noch ein wenig erweitert :
+  - kann jetzt direkt in eine MySQL schreiben (es wird aber dann JEDER Messwert geschrieben, d.h. so ca. alle 3 Sekunden)
+  - kann auch direkt (in die RAMDisk) bei jedem neuen Messwert eine Datei überschreiben (damit man bei Auslieferung via Webserver möglichst aktuelle Daten sieht
+  - Kann direkt ein Tasmota Gerät (z.B. umgeflashtes SonOff o.ä.) bei Überschuss ansteuern
+
+# Inspiriert durch diesen Blog
 https://www.michaelreitbauer.at/blog
 
 
@@ -23,9 +33,6 @@ Smart Meter werden von der Netz NÖ GmbH eingebaut, auf Basis der gesetzlichen F
 ### Zähler Hersteller
 * Kaifa Drehstromzähler MA309
 
-
-### Unterstützung
-Spendenlink: https://www.paypal.me/greenMikeEU
 
 ## License
 
