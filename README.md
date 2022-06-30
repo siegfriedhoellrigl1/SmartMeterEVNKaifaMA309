@@ -8,6 +8,7 @@ siehe https://inator.at/?p=1492
   - kann auch direkt (in die RAMDisk) bei jedem neuen Messwert eine Datei überschreiben (damit man bei Auslieferung via Webserver möglichst aktuelle Daten sieht
   - Kann direkt ein Tasmota Gerät (z.B. umgeflashtes SonOff o.ä.) bei Überschuss ansteuern
   - Erweitert um die "dbwriter.sh" -> damit man auch per Cronjob Daten in eine MySQL schreiben kann; z.B. alle 15 Minuten
+  - smartmeter.json - kann man verwenden, damit man für Grafana bereits eine funktionierende Vorlage hat. (mögl. sind Anpassungen notwendig) - funktioniert aber sowohl mit dem direkten Schreibvorgang aus dem Python Script heraus, als auch mit dem 15-Min Cronjob
 
 # Inspiriert durch diesen Blog
 https://www.michaelreitbauer.at/blog
